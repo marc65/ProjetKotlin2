@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/movieTitleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:textStyle="bold"
+        tools:text="Movie Title" />
+
+    <TextView
+        android:id="@+id/originalLanguageTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Original Language" />
+
+    <TextView
+        android:id="@+id/overviewTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Overview" />
+
+    <TextView
+        android:id="@+id/popularityTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Popularity" />
+
+    <TextView
+        android:id="@+id/productionCompaniesTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Production Companies" />
+
+    <TextView
+        android:id="@+id/releaseDateTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Release Date" />
+
+    <TextView
+        android:id="@+id/durationTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Duration" />
+
+    <TextView
+        android:id="@+id/voteAverageTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Vote Average" />
+    <ImageView
+        android:id="@+id/posterImageView"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/placeholder" />
+
+</LinearLayout>
