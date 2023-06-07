@@ -1,6 +1,7 @@
 package fr.epf.mm.projetandroid
 //import DetailsFilmActivity
 import MovieAdapter
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -37,10 +38,13 @@ class MainActivity : AppCompatActivity() {
         editTextSearch = findViewById(R.id.editTextSearch)
         buttonSearch = findViewById(R.id.buttonSearch)
 
+        loadFavorites()
+
         buttonSearch.setOnClickListener {
             val query = editTextSearch.text.toString()
             searchMovies(query)
         }
+        //updateFavoriteMovies()
     }
 
     private fun searchMovies(query: String) {
@@ -105,6 +109,23 @@ class MainActivity : AppCompatActivity() {
         // Mettre à jour la liste des films favoris dans le thread principal
         handler.post {
             adapter.notifyDataSetChanged()
+            saveFavorites()
+        }
+    }
+    private fun saveFavorites() {
+        val favoriteIds = favoriteMovies.map { it.id } // Récupérer les identifiants des films favoris
+        val sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putStringSet("favoriteIds", favoriteIds.map { it.toString() }.toSet()) // Enregistrer les identifiants dans les préférences partagées
+        editor.apply()
+    }
+    private fun loadFavorites() {
+        val sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val favoriteIds = sharedPreferences.getStringSet("favoriteIds", emptySet()) ?: emptySet()
+        val favoriteMovieIds = favoriteIds.mapNotNull { it.toIntOrNull() }
+        favoriteMovies.addAll(movies.filter { it.id in favoriteMovieIds })
+        favoriteMovies.forEach { movie ->
+            movie.isFavorite = true
         }
     }
 }

@@ -29,9 +29,9 @@ class MovieAdapter(private var movies: List<Movie>) : RecyclerView.Adapter<Movie
         holder.favoriteCheckBox.setOnCheckedChangeListener { _, isChecked ->
             movie.isFavorite = isChecked
             (holder.itemView.context as MainActivity).updateFavoriteMovies()
-            //notifyItemChanged(position)
         }
     }
+
 
     override fun getItemCount(): Int {
         return movies.size
@@ -67,14 +67,23 @@ class MovieAdapter(private var movies: List<Movie>) : RecyclerView.Adapter<Movie
                 .placeholder(R.drawable.placeholder) // Image de remplacement en cas de chargement ou d'erreur
                 .into(posterImageView)
 
+            favoriteCheckBox.setOnCheckedChangeListener(null)
             favoriteCheckBox.isChecked = movie.isFavorite
+
+            favoriteCheckBox.setOnCheckedChangeListener { _, isChecked ->
+                movie.isFavorite = isChecked
+                // Ne mettez pas à jour les films favoris ici
+            }
         }
     }
-
     fun setData(movies: List<Movie>) {
         this.movies = movies
         notifyDataSetChanged()
     }
+    //fun setFavoriteMovies(favoriteMovies: List<Movie>) {
+    //    this.favoriteMovies = favoriteMovies
+    //    notifyDataSetChanged()
+    //}
 
 
 }
